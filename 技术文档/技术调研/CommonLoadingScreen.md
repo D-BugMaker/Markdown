@@ -105,50 +105,10 @@ graph TD
 
 ```
 
-```mermaid
-graph TD
-    CommonStartupLoadingScreen --> Core
-    CommonStartupLoadingScreen --> CoreUObject
-    CommonStartupLoadingScreen --> Engine
-    CommonStartupLoadingScreen --> Slate
-    CommonStartupLoadingScreen --> SlateCore
-    CommonStartupLoadingScreen --> MoviePlayer
-    CommonStartupLoadingScreen --> PreLoadScreen
-    CommonStartupLoadingScreen --> DeveloperSettings
-    
-    CoreUObject --> Core
-    
-    Engine --> Core
-    Engine --> CoreUObject
-    Engine --> SlateCore
-    Engine --> Slate
-    
-    SlateCore --> Core
-    SlateCore --> CoreUObject
-    
-    Slate --> Core
-    Slate --> CoreUObject
-    Slate --> SlateCore
-    
-    MoviePlayer --> Core
-    MoviePlayer --> CoreUObject
-    MoviePlayer --> SlateCore
-    MoviePlayer --> Slate
-    MoviePlayer --> Engine
-    
-    PreLoadScreen --> Core
-    PreLoadScreen --> CoreUObject
-    PreLoadScreen --> SlateCore
-    PreLoadScreen --> Slate
-    PreLoadScreen --> Engine
-    
-    DeveloperSettings --> Core
-    DeveloperSettings --> CoreUObject
-```
-
 ### 3.2 CommonPreLoadScreen
 
 #### 3.2.1 基类
+
 [^FPreLoadScreenBase]: 所属模块PreLoadScreen
 
 #### 3.2.2 成员
@@ -163,15 +123,16 @@ graph TD
 
 #### 3.2.4 流程图
 ```mermaid
-graph TD
-    Start[游戏启动] --> InitManager[初始化 CommonLoadingScreenManager]
-    InitManager --> ShowScreen[显示加载屏幕]
-    ShowScreen --> CheckProgress{加载进度是否完成?}
-    CheckProgress -- 是 --> HideScreen[隐藏加载屏幕]
-    HideScreen --> End[加载流程结束]
-    CheckProgress -- 否 --> UpdateProgress[更新进度显示]
-    UpdateProgress --> CheckProgress
-
+graph TD    
+    Start[游戏启动] --> StartupModule[FCommonStartupLoadingScreenModule::StartupModule]
+    StartupModule --> IsRunningDedicatedServer{IsRunningDedicatedServer?}
+    IsRunningDedicatedServer --True--> End[FCommonStartupLoadingScreenModule::ShutdownModule]
+    IsRunningDedicatedServer --False--> Init[PreLoadingScreen Init]
+    Init --> CheckPreLoadScreenAvailability{CheckPreLoadScreenAvailability?}
+    CheckPreLoadScreenAvailability --True--> Register[RegisterPreLoadScreen]
+    CheckPreLoadScreenAvailability --False--> End
+    Register --> OnPreLoadScreenManagerCleanUp[OnPreLoadScreenManagerCleanUp]
+    OnPreLoadScreenManagerCleanUp --> End
 ```
 
 #### 3.2.5 时序图
