@@ -6,11 +6,11 @@
 
 ## 1. Editor数据
 
-![EditorServer](F:\Markdown\资源引用\图片\AI&行为树ProfilerTrace\EditorServer.png)
+![EditorServer](..\..\资源引用\图片\AI&行为树ProfilerTrace\EditorServer.png)
 
 ## 2. Test数据
 
-![TestServer](F:\Markdown\资源引用\图片\AI&行为树ProfilerTrace\TestServer.png)
+![TestServer](..\..\资源引用\图片\AI&行为树ProfilerTrace\TestServer.png)
 
 ## 3. 数据对比
 
@@ -30,10 +30,11 @@
 2. 寻路
 
 ## 6. 查漏补缺
-1. 服务器跑ABP 宝箱&能量核心
-![ServerABP1](F:\Markdown\资源引用\图片\AI&行为树ProfilerTrace\ServerABP1.png)
 
-![ServerABP1](F:\Markdown\资源引用\图片\AI&行为树ProfilerTrace\ServerABP2.png)
+1. 服务器跑ABP 宝箱&能量核心
+![ServerABP1](..\..\资源引用\图片\AI&行为树ProfilerTrace\ServerABP1.png)
+
+![ServerABP1](..\..\资源引用\图片\AI&行为树ProfilerTrace\ServerABP2.png)
 
 2. 释放技能有大量的OnSkillActive
 
