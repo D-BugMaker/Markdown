@@ -14,7 +14,9 @@
 > 加载屏幕管理器处理项目指定的加载屏幕UI的创建和显示 .该模块主要用于在游戏加载阶段显示过渡画面或加载动画，提供一个灵活的、可自定义的加载屏幕解决方案。
 
 - **核心功能**
-	-  TODO
+	-  LoadingScreenManager 加载界面管理器
+	-  CommonLoadingScreenSettings 加载界面配置
+	-  LoadingProcessInterface 加载界面处理接口
 
 ---
 
@@ -414,7 +416,7 @@ classDiagram
     }
 
     FLoadingScreenInputPreProcessor {
-        bool CanEatInput()
+        bool CanEatInput
     }
 
     %% 定义关系
@@ -513,7 +515,8 @@ sequenceDiagram
     ULoadingScreenManager ->> LoadingProcess:ShouldShowLoadingScreen
     LoadingProcess -->> ULoadingScreenManager:DebugReasonForShowingOrHidingLoadingScreen
     
-    ULoadingScreenManager ->> ULoadingScreenManager: ShowLoadingScreen
+    ULoadingScreenManager ->> LoadingScreenUI: ShowLoadingScreen
+    activate LoadingScreenUI
     ULoadingScreenManager ->> InputPreProcessor : StartBlockingInput
     ULoadingScreenManager ->> CommonLoadingScreenSettings: GetLoadingScreenWidgetClass
     CommonLoadingScreenSettings -->> ULoadingScreenManager: LoadingScreenWidget
@@ -522,6 +525,7 @@ sequenceDiagram
     ULoadingScreenManager ->> ULoadingScreenManager: HideLoadingScreen
     ULoadingScreenManager ->> InputPreProcessor : StopBlockingInput
     ULoadingScreenManager ->> LoadingScreenUI: RemoveWidgetFromViewport
+    deactivate LoadingScreenUI
     ULoadingScreenManager --> ULoadingScreenManager:ChangePerformanceSettings
 
     
